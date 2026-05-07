@@ -1,0 +1,24 @@
+{
+    "custom_testimonials": {
+        "column": {
+            "testimonial_id": true,
+            "name": true,
+            "email": true,
+            "title": true,
+            "content": true,
+            "rating": true,
+            "image_path": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true,
+            "sort_order": true
+        },
+        "index": {
+            "IDX_CUSTOM_TESTIMONIALS_IS_ACTIVE": true,
+            "IDX_CUSTOM_TESTIMONIALS_SORT_ORDER": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,12 @@
+/**
+ * Email styles source file for Tailwind CSS v4
+ * This file imports the theme and processes the email.css
+ */
+
+@import "tailwindcss";
+
+/* Import theme tokens that define primary colors */
+@import "../generated/hyva-tokens.css";
+
+/* Import the actual email styles */
+@import "../theme/email.css";

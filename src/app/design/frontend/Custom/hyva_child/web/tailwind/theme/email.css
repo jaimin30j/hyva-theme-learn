@@ -1,0 +1,12 @@
+.footer {
+    @apply border-t-2 border-primary;
+    .span {
+        @apply bg-primary;
+    }
+}
+.header {
+    @apply border-b-2 border-primary;
+    .span {
+        @apply bg-primary;
+    }
+}
