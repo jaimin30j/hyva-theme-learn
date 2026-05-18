@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <jaimin_previously_purchased>
+            <general>
+                <enabled>0</enabled>
+                <max_products>100</max_products>
+                <label_text>Previously Purchased</label_text>
+            </general>
+        </jaimin_previously_purchased>
+    </default>
+</config>

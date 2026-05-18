@@ -20,7 +20,12 @@
     },
     "version": "2.4.8-p3",
     "require": {
+        "hyva-themes/magento2-cms-tailwind-jit": "^1.2",
         "hyva-themes/magento2-default-theme": "^1.4",
+        "hyva-themes/magento2-hyva-widgets": "^1.0",
+        "hyva-themes/magento2-luma-checkout": "^1.1",
+        "hyva-themes/magento2-react-checkout": "^1.1",
+        "hyva-themes/magento2-theme-fallback": "^1.0",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
         "magento/module-bundle-sample-data": "100.4.*",
@@ -96,6 +101,10 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": {
+        "hyva-themes/magento2-react-checkout": {
+            "type": "git",
+            "url": "git@github.com:friends-of-hyva/magento2-react-checkout.git"
+        },
         "private-packagist": {
             "type": "composer",
             "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/"

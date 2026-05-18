@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Bind the interface to the concrete implementation -->
+    <preference for="Jaimin\Blog\Api\PostRepositoryInterface"
+                type="Jaimin\Blog\Model\PostRepository"/>
+
+    <preference for="Jaimin\Blog\Api\Data\PostInterface"
+                type="Jaimin\Blog\Model\Post"/>
+
+</config>

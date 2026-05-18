@@ -1,0 +1,154 @@
+type Query {
+    blogPosts(
+        pageSize: Int = 20
+            @doc(description: "Number of posts per page. Maximum 100.")
+        currentPage: Int = 1
+            @doc(description: "Current page number, starting from 1.")
+        filter: BlogPostFilterInput
+            @doc(description: "Optional filter criteria for the post list.")
+        sort: BlogPostSortInput
+            @doc(description: "Sort order. Defaults to newest first.")
+    ): BlogPostsOutput
+        @resolver(class: "Jaimin\\Blog\\Model\\Resolver\\Posts")
+        @cache(cacheIdentity: "Jaimin\\Blog\\Model\\Resolver\\Cache\\PostIdentity")
+        @doc(description: "Retrieve a paginated list of blog posts.")
+
+    blogPost(
+        id: Int
+            @doc(description: "Post ID. Provide either id or url_key.")
+        url_key: String
+            @doc(description: "URL slug. Provide either id or url_key.")
+    ): BlogPost
+        @resolver(class: "Jaimin\\Blog\\Model\\Resolver\\Post")
+        @cache(cacheIdentity: "Jaimin\\Blog\\Model\\Resolver\\Cache\\PostIdentity")
+        @doc(description: "Retrieve a single blog post by ID or url_key.")
+}
+
+type Mutation {
+    createBlogPost(input: CreateBlogPostInput!): BlogPostMutationOutput
+        @resolver(class: "Jaimin\\Blog\\Model\\Resolver\\CreatePost")
+        @doc(description: "Create a new blog post. Requires customer authentication.")
+
+    updateBlogPost(id: Int!, input: UpdateBlogPostInput!): BlogPostMutationOutput
+        @resolver(class: "Jaimin\\Blog\\Model\\Resolver\\UpdatePost")
+        @doc(description: "Update an existing blog post. Requires customer authentication.")
+
+    deleteBlogPost(id: Int!): DeleteBlogPostOutput
+        @resolver(class: "Jaimin\\Blog\\Model\\Resolver\\DeletePost")
+        @doc(description: "Delete a blog post by ID. Requires customer authentication.")
+}
+
+type BlogPost {
+    post_id: Int
+        @doc(description: "Unique post identifier.")
+    title: String
+        @doc(description: "Post title.")
+    content: String
+        @doc(description: "Full post content in HTML.")
+    author: String
+        @doc(description: "Author display name.")
+    status: Int
+        @doc(description: "Post status. 1 is enabled, 0 is disabled.")
+    url_key: String
+        @doc(description: "URL slug used in the post permalink.")
+    meta_title: String
+        @doc(description: "SEO meta title.")
+    meta_description: String
+        @doc(description: "SEO meta description.")
+    created_at: String
+        @doc(description: "Creation timestamp.")
+    updated_at: String
+        @doc(description: "Last updated timestamp.")
+}
+
+type BlogPostsOutput {
+    items: [BlogPost]
+        @doc(description: "Array of blog posts on the current page.")
+    total_count: Int
+        @doc(description: "Total number of posts matching the filter, regardless of page.")
+    page_info: BlogPostPageInfo
+        @doc(description: "Pagination metadata.")
+}
+
+type BlogPostPageInfo {
+    page_size: Int
+        @doc(description: "Number of items per page.")
+    current_page: Int
+        @doc(description: "The current page number.")
+    total_pages: Int
+        @doc(description: "Total number of pages.")
+}
+
+type BlogPostMutationOutput {
+    post: BlogPost
+        @doc(description: "The created or updated post.")
+    message: String
+        @doc(description: "Success or status message.")
+}
+
+type DeleteBlogPostOutput {
+    success: Boolean
+        @doc(description: "True if the post was deleted successfully.")
+    message: String
+        @doc(description: "Confirmation or error message.")
+}
+
+input BlogPostFilterInput {
+    title: FilterMatchTypeInput
+        @doc(description: "Partial match filter on post title.")
+    author: FilterMatchTypeInput
+        @doc(description: "Partial match filter on author name.")
+    status: FilterEqualTypeInput
+        @doc(description: "Exact match filter on status. Use 1 for enabled posts.")
+    url_key: FilterEqualTypeInput
+        @doc(description: "Exact match filter on url_key slug.")
+    created_at: FilterRangeTypeInput
+        @doc(description: "Date range filter on creation date. Accepts from and to fields.")
+    updated_at: FilterRangeTypeInput
+        @doc(description: "Date range filter on last updated date.")
+}
+
+input BlogPostSortInput {
+    created_at: SortEnum
+        @doc(description: "Sort by creation date.")
+    updated_at: SortEnum
+        @doc(description: "Sort by last updated date.")
+    title: SortEnum
+        @doc(description: "Sort alphabetically by title.")
+    author: SortEnum
+        @doc(description: "Sort by author name.")
+}
+
+input CreateBlogPostInput {
+    title: String!
+        @doc(description: "Post title. Required.")
+    content: String!
+        @doc(description: "Post content in HTML. Required.")
+    url_key: String!
+        @doc(description: "Unique URL slug. Required.")
+    author: String
+        @doc(description: "Author name. Defaults to Jaimin if omitted.")
+    status: Int
+        @doc(description: "Post status. 1 is enabled. Defaults to 1.")
+    meta_title: String
+        @doc(description: "SEO meta title.")
+    meta_description: String
+        @doc(description: "SEO meta description.")
+}
+
+input UpdateBlogPostInput {
+    title: String
+        @doc(description: "Updated post title.")
+    content: String
+        @doc(description: "Updated post content in HTML.")
+    url_key: String
+        @doc(description: "Updated URL slug.")
+    author: String
+        @doc(description: "Updated author name.")
+    status: Int
+        @doc(description: "Updated status. 1 is enabled, 0 is disabled.")
+    meta_title: String
+        @doc(description: "Updated SEO meta title.")
+    meta_description: String
+        @doc(description: "Updated SEO meta description.")
+}

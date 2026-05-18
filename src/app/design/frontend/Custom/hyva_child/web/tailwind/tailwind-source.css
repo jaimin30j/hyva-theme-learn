@@ -18,6 +18,8 @@
 @import "tailwindcss" source(none);
 @source "../../**/*.phtml";
 @source "../../**/*.xml";
+@source inline("{xl:,}columns-{1,2,3}");
+@source inline("{hover:,}bg-green-{50,{100..900..100},950}");
 
 /* Custom styles */
 @import "./base";

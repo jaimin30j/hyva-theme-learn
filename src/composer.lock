@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1ce7c4ca33256e3fb0208e298e036bf",
+    "content-hash": "b503b3c7d5cabed319aed9b54fffa0e7",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -2565,6 +2565,50 @@
             "time": "2026-04-09T19:06:12+02:00"
         },
         {
+            "name": "hyva-themes/magento2-cms-tailwind-jit",
+            "version": "1.2.25",
+            "dist": {
+                "type": "zip",
+                "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/hyva-themes/magento2-cms-tailwind-jit/1.2.25.0/b5de6fba4618b95dad7a583e7495c05561e32159.zip",
+                "reference": "b5de6fba4618b95dad7a583e7495c05561e32159",
+                "mirrors": [
+                    {
+                        "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4.0||>=8.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Hyva\\CmsTailwindJit\\": "src/"
+                }
+            },
+            "notification-url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Hyvä Themes B.V.",
+                    "email": "info@hyva.io"
+                }
+            ],
+            "description": "Automatic TailwindCSS classes for CMS content in Hyvä Themes.",
+            "support": {
+                "source": "https://gitlab.hyva.io/hyva-themes/magento2-cms-tailwind-jit/-/tree/1.2.25",
+                "issues": "https://gitlab.hyva.io/hyva-themes/magento2-cms-tailwind-jit/-/issues"
+            },
+            "time": "2026-04-23T15:47:16+02:00"
+        },
+        {
             "name": "hyva-themes/magento2-compat-module-fallback",
             "version": "1.1.4",
             "dist": {
@@ -2801,6 +2845,100 @@
             "time": "2023-03-13T17:01:18+00:00"
         },
         {
+            "name": "hyva-themes/magento2-hyva-widgets",
+            "version": "1.0.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/hyva-themes/magento2-hyva-widgets/1.0.3.0/9c8c302c2d8c791078cc3b799d5fea5c09161b85.zip",
+                "reference": "9c8c302c2d8c791078cc3b799d5fea5c09161b85",
+                "mirrors": [
+                    {
+                        "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyva-themes/magento2-default-theme": ">=1.1.10",
+                "magento/framework": ">=102.0.0",
+                "php": ">=7.4.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Hyva\\Widgets\\": "src/"
+                }
+            },
+            "notification-url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/downloads/",
+            "license": [
+                "See LICENSE.md or https://hyva.io/license"
+            ],
+            "authors": [
+                {
+                    "name": "Goran Horvat",
+                    "email": "goran@bemeir.com"
+                },
+                {
+                    "name": "Willem Wigman",
+                    "email": "willem@hyva.io"
+                }
+            ],
+            "description": "Hyvä Themes Magento 2 module that adds a simple widget CMS system",
+            "support": {
+                "source": "https://gitlab.hyva.io/hyva-themes/magento2-hyva-widgets/-/tree/1.0.3",
+                "issues": "https://gitlab.hyva.io/hyva-themes/magento2-hyva-widgets/-/issues"
+            },
+            "time": "2024-08-28T14:23:14+00:00"
+        },
+        {
+            "name": "hyva-themes/magento2-luma-checkout",
+            "version": "1.1.7",
+            "dist": {
+                "type": "zip",
+                "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/hyva-themes/magento2-luma-checkout/1.1.7.0/4a77fd88723415e64fbec10e2d40dc650a2e15d0.zip",
+                "reference": "4a77fd88723415e64fbec10e2d40dc650a2e15d0",
+                "mirrors": [
+                    {
+                        "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyva-themes/magento2-theme-fallback": "*",
+                "magento/framework": "*",
+                "magento/module-checkout": ">=100.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Hyva\\LumaCheckout\\": "src/"
+                }
+            },
+            "notification-url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Hyvä Themes B.V.",
+                    "email": "info@hyva.io"
+                }
+            ],
+            "description": "Luma Fallback Checkout for Hyvä Themes",
+            "support": {
+                "source": "https://gitlab.hyva.io/hyva-themes/magento2-luma-checkout/-/tree/1.1.7",
+                "issues": "https://gitlab.hyva.io/hyva-themes/magento2-luma-checkout/-/issues"
+            },
+            "time": "2025-11-04T16:55:16+01:00"
+        },
+        {
             "name": "hyva-themes/magento2-mollie-theme-bundle",
             "version": "1.0.3",
             "dist": {
@@ -2895,6 +3033,88 @@
                 "issues": "https://gitlab.hyva.io/hyva-themes/magento2-order-cancellation-webapi/-/issues"
             },
             "time": "2025-11-04T17:06:08+01:00"
+        },
+        {
+            "name": "hyva-themes/magento2-react-checkout",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:friends-of-hyva/magento2-react-checkout.git",
+                "reference": "fff0ec0ae454ceaeba4322b1d2a776b64b8be07d"
+            },
+            "require": {
+                "hyva-themes/magento2-graphql-tokens": "^1.0",
+                "magento/framework": "*",
+                "magento/module-catalog": ">=103.0.0",
+                "magento/module-checkout": ">=100.3.0",
+                "magento/module-customer": ">=102.0.0"
+            },
+            "suggest": {
+                "hyva-themes/magento2-graphql-tokens": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "FriendsOfHyva\\ReactCheckout\\": "src/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Hyvä Themes BV",
+                    "email": "info@hyva.io"
+                }
+            ],
+            "description": "Highly customizable Magento 2 Checkout, built with React",
+            "time": "2026-03-09T11:46:38+00:00"
+        },
+        {
+            "name": "hyva-themes/magento2-theme-fallback",
+            "version": "1.0.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/hyva-themes/magento2-theme-fallback/1.0.4.0/6673002d68b23c850b84808ca93b7c9ac7141c49.zip",
+                "reference": "6673002d68b23c850b84808ca93b7c9ac7141c49",
+                "mirrors": [
+                    {
+                        "url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "magento/framework": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/registration.php"
+                ],
+                "psr-4": {
+                    "Hyva\\ThemeFallback\\": "src/"
+                }
+            },
+            "notification-url": "https://hyva-themes.repo.packagist.com/magento-test-y1yermy/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Hyvä Themes B.V.",
+                    "email": "info@hyva.io"
+                }
+            ],
+            "description": "Allow for Hyvä Themes to fall back to regular Magento themes on specific routes.",
+            "support": {
+                "source": "https://gitlab.hyva.io/hyva-themes/magento2-theme-fallback/-/tree/1.0.4",
+                "issues": "https://gitlab.hyva.io/hyva-themes/magento2-theme-fallback/-/issues"
+            },
+            "time": "2025-11-04T16:59:50+01:00"
         },
         {
             "name": "hyva-themes/magento2-theme-module",

@@ -8,6 +8,8 @@
 
 @source "../../../../../../../../vendor/hyva-themes/magento2-theme-module/src";
 @source "../../../../../../../../vendor/mollie/magento2-hyva-compatibility/src/Mollie_HyvaCompatibility";
+@source "../../../../../../../../vendor/hyva-themes/magento2-react-checkout/src";
+@source "../../../../../../../../vendor/hyva-themes/magento2-hyva-widgets/src";
 @source "../../../../../../../../vendor/hyva-themes/magento2-default-theme";
 
 

@@ -1,0 +1,202 @@
+<?php declare(strict_types=1);
+/**
+ * This file is part of the Jaimin_Blog module for Magento 2.
+ * (c) Jaimin Patel
+ * For the full copyright and license information, please view the LICENSE.txt that is distributed with this source code.
+*/
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Hyva\Theme\Model\ViewModelRegistry $viewModels */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Hyva\Theme\Model\ViewModelRegistry;
+
+?>
+
+<?php $gqlViewModel = $viewModels->require(\Hyva\GraphqlViewModel\ViewModel\GraphqlViewModel::class); ?>
+
+<!-- Create blog form -->
+<section x-data="initCreateBlogComponent()" class="container mx-auto px-4 mt-10">
+    <h2 class="text-2xl font-bold mb-6">Create New Blog Post</h2>
+    <form @submit.prevent="createBlog" class="max-w-lg">
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+            <input type="text" id="title" x-model="newBlog.title" required
+                   class="w-full border border-gray-300 rounded px-3 py-2"/>
+        </div>
+        <div class="mb-4">
+            <label for="content" class="block text-gray-700 font-bold mb-2">Content</label>
+            <textarea id="content" x-model="newBlog.content" required
+                      class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="url_key" class="block text-gray-700 font-bold mb-2">URL Key</label>
+            <input type="text" id="url_key" x-model="newBlog.url_key"
+                   class="w-full border border-gray-300 rounded px-3 py-2" required/>
+        </div>
+        <button type="submit"
+                class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+            Create Blog Post
+        </button>
+        <template x-if="newBlog.message && !newBlog.message.includes('error')">
+            <p class="mt-4 message success" x-text="newBlog.message"></p>
+        </template>
+        <template x-if="newBlog.message && newBlog.message.includes('error')">
+            <p class="mt-4 message error" x-text="newBlog.message"></p>
+        </template>
+    </form>
+</section>
+<script>
+    function initCreateBlogComponent() {
+        return {
+            newBlog: {
+                title: '',
+                content: '',
+                url_key: '',
+                message: ''
+            },
+            async createBlog() {
+                const mutation = `mutation {
+                    createBlogPost(input: {
+                        title: "${this.newBlog.title}",
+                        content: "${this.newBlog.content}",
+                        url_key: "${this.newBlog.url_key}"
+                    }) {
+                        message
+                        post { post_id title url_key created_at }
+                    }
+                }`;
+
+                const endpoint = BASE_URL + 'graphql';
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ query: mutation })
+                    });
+                    const result = await response.json();
+                    this.newBlog.message = result.data.createBlogPost.message;
+                    console.log("Blog created:", result);
+                    // Optionally, you can refresh the blog list or show a success message here
+                } catch (error) {
+                    console.error("GraphQL Error:", error);
+                    this.newBlog.message = "An error occurred while creating the blog post.";
+                }
+            }
+        };
+    }
+</script>
+
+<script>
+    'use strict';
+
+    function initBlogComponent() {
+        return {
+            isLoading: true,
+            blogs: [],
+            fetchBlogs() {
+                const query = `<?= /** @noEscape */ $gqlViewModel->query(
+                    "blog_query",
+                    'query {
+                         	blogPosts(
+                                pageSize: 10
+                                currentPage: 1
+                                filter: { status: { eq: "1" } }
+                                sort: { created_at: DESC }
+                            ) {
+                                total_count
+                                page_info { current_page total_pages }
+                                items {
+                                post_id title author url_key
+                                created_at updated_at
+                                }
+                            }
+                        }'
+                ) ?>`;
+
+                const endpoint = BASE_URL + 'graphql';
+
+                fetch(endpoint + '?' + new URLSearchParams({query}), {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .then((response) => response.json())
+                    .then((result) => {
+                        this.blogs = result.data.blogPosts.items;
+                    })
+                    .catch((error) => {
+                        console.error("GraphQL Error:", error);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
+            },
+        };
+    }
+
+</script>
+
+<!-- ====== Blog Section Start -->
+<section x-data="initBlogComponent()" x-init="fetchBlogs()" class="pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+    <!-- Loading indicator -->
+    <div x-show="isLoading" class="hyva-loading-indicator py-8">
+        <?= $block->getChildHtml('loading') ?>
+    </div>
+    <div class="container" x-cloak>
+        <div class="flex flex-wrap justify-center -mx-4">
+            <div class="w-full px-4">
+                <div class="text-center mx-auto mb-[60px] lg:mb-20 max-w-[510px]">
+                <span class="font-semibold text-lg text-primary mb-2 block">
+                    Our Blogs
+                </span>
+                </div>
+            </div>
+        </div>
+        <template x-if="!isLoading">
+            <div id="blog-container" class="flex flex-wrap -mx-4">
+                <template x-for="blog in blogs" :key="blog.post_id">
+                    <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+                        <div class="max-w-[370px] mx-auto mb-10">
+                            <div class="rounded overflow-hidden mb-8">
+                                <img
+                                    src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-01.jpg"
+                                    alt="image"
+                                    class="w-full"
+                                    loading="lazy"
+                                    />
+                            </div>
+                            <div>
+                            <span class=" bg-primary rounded inline-block text-center py-1 px-4 text-xs leading-loose font-semibold text-white mb-5" x-text="blog.created_at"></span>
+                            <h3>
+                                <a
+                                    class="
+                                    font-semibold
+                                    text-xl
+                                    sm:text-2xl
+                                    lg:text-xl
+                                    xl:text-2xl
+                                    mb-4
+                                    inline-block
+                                    text-dark
+                                    hover:text-primary"
+                                    :href="blog.url_key"
+                                    x-text="blog.title"
+                                    >
+                                </a>
+                            </h3>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+         </template>
+    </div>
+</section>
+<!-- ====== Blog Section End -->

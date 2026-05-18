@@ -1,0 +1,17 @@
+{
+    "name": "jaimin/module-blog",
+    "description": "Jaimin Blog module with GraphQL API",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=8.1",
+        "magento/framework": "*",
+        "magento/module-graphql": "*"
+    },
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "Jaimin\\Blog\\": ""
+        }
+    }
+}

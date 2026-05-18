@@ -79,7 +79,7 @@ $viewModels->require(BlockJsDependencies::class)->setBlockTemplateDependency($bl
 <?php if ($product->isSaleable()): ?>
 <form method="post"
     action="<?= $escaper->escapeUrl($productViewModel->getAddToCartUrl($product, ['useUencPlaceholder' => true])) ?>"
-    class="item product product-item product_addtocart_form card card-interactive grow flex flex-col w-full <?= $viewIsGrid ? '' : 'md:flex-row' ?>"
+    class="relative item product product-item product_addtocart_form card card-interactive grow flex flex-col w-full <?= $viewIsGrid ? '' : 'md:flex-row' ?>"
     <?php if ($product->getOptions()): ?>
     enctype="multipart/form-data"
     <?php endif; ?>
@@ -107,6 +107,17 @@ $viewModels->require(BlockJsDependencies::class)->setBlockTemplateDependency($bl
     <?php endforeach; ?>
 >
 <?php endif; ?>
+    <div
+    x-data
+    x-cloak
+    x-show="$store.previouslyPurchased.hasPurchased('<?= $escaper->escapeJs($product->getSku()) ?>')"
+    class="absolute top-0 right-0 z-20"
+>
+    <span
+        class="bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded"
+        x-text="$store.previouslyPurchased.label">
+    </span>
+</div>        
     <?php /* Product Image */ ?>
     <?php if ($blockImage = $block->getImage($product, $imageDisplayArea)): ?>
         <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
