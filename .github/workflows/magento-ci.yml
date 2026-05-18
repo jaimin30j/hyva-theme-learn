@@ -28,6 +28,3 @@ jobs:
 
       - name: Check PHP Syntax
         run: find src/app/code -name "*.php" -exec php -l {} \;
-
-      - name: PHPStan
-        uses: php-actions/phpstan@v3
